@@ -12,17 +12,15 @@ public class Building : MonoBehaviour
     public bool isOperational = true;
 
     [Header("Storage")]
-    public float maxStorageCapacity = 20f;
-    public float currentWaterStorage = 0f;
+    public float maxStorageCapacity;
     public float currentWoodStorage = 0f;
     public float currentStoneStorage = 0f;
-    public float currentElectricityStorage = 0f;
-
+    
     [Header("Internal Supply Storage")]
+    public float maxInternalStorageCapacity = 0f;
     public float internalWaterStorage = 0f;
     public float internalElectricityStorage = 0f;
-    private const float INTERNAL_STORAGE_CAPACITY = 10f;
-
+    
     [Header("Destinations")]
     public List<Building> destinations = new List<Building>();
 
@@ -57,6 +55,12 @@ public class Building : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        maxStorageCapacity = data.maxStorageCapacity;
+        maxInternalStorageCapacity = data.internalStorage;
+    }
+    
     private void Update()
     {
         if (!isConstructed) return;
@@ -136,7 +140,7 @@ public class Building : MonoBehaviour
         {
             case ProductionType.Water:
                 internalWaterStorage -= amount;
-                float waterCapacity = destination.data.requiresWater ? INTERNAL_STORAGE_CAPACITY : destination.data.internalStorage;
+                float waterCapacity = destination.data.requiresWater ? destination.maxInternalStorageCapacity : destination.maxStorageCapacity;
                 float waterSpace = waterCapacity - destination.internalWaterStorage;
                 float waterToSend = Mathf.Min(amount, waterSpace);
                 destination.internalWaterStorage += waterToSend;
@@ -151,7 +155,7 @@ public class Building : MonoBehaviour
                 break;
             case ProductionType.Electricity:
                 internalElectricityStorage -= amount;
-                float elecCapacity = destination.data.requiresElectricity ? INTERNAL_STORAGE_CAPACITY : destination.data.internalStorage;
+                float elecCapacity = destination.data.requiresElectricity ? destination.maxInternalStorageCapacity : destination.maxStorageCapacity;
                 float elecSpace = elecCapacity - destination.internalElectricityStorage;
                 float elecToSend = Mathf.Min(amount, elecSpace);
                 destination.internalElectricityStorage += elecToSend;
@@ -180,19 +184,19 @@ public class Building : MonoBehaviour
         {
             case ProductionType.Water:
                 current = internalWaterStorage;
-                maxCapacity = data.requiresWater ? INTERNAL_STORAGE_CAPACITY : data.internalStorage;
+                maxCapacity = data.requiresWater ? maxInternalStorageCapacity : maxStorageCapacity;
                 break;
             case ProductionType.Wood:
                 current = currentWoodStorage;
-                maxCapacity = data.internalStorage;
+                maxCapacity = maxStorageCapacity;
                 break;
             case ProductionType.Stone:
                 current = currentStoneStorage;
-                maxCapacity = data.internalStorage;
+                maxCapacity = maxStorageCapacity;
                 break;
             case ProductionType.Electricity:
                 current = internalElectricityStorage;
-                maxCapacity = data.requiresElectricity ? INTERNAL_STORAGE_CAPACITY : data.internalStorage;
+                maxCapacity = data.requiresElectricity ? maxInternalStorageCapacity : maxStorageCapacity;
                 break;
         }
         return Mathf.Max(0, maxCapacity - current);
@@ -214,13 +218,13 @@ public class Building : MonoBehaviour
         switch (data.productionType)
         {
             case ProductionType.Water:
-                return currentWaterStorage >= maxStorageCapacity;
+                return internalWaterStorage >= maxInternalStorageCapacity;
             case ProductionType.Wood:
                 return currentWoodStorage >= maxStorageCapacity;
             case ProductionType.Stone:
                 return currentStoneStorage >= maxStorageCapacity;
             case ProductionType.Electricity:
-                return currentElectricityStorage >= maxStorageCapacity;
+                return internalElectricityStorage >= maxInternalStorageCapacity;
             default:
                 return true;
         }
