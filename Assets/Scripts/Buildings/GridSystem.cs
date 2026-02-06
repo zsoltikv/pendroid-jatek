@@ -113,10 +113,6 @@ public class GridSystem : MonoBehaviour
         var data = new TileData();
         tile.GetTileData(cellPos, groundTilemap, ref data);
 
-        if (data.sprite != null)
-        {
-            Debug.Log($"Tile sprite name at {cellPos}: {data.sprite.name}");
-        }
         
         // Allow any grassland tile (center, left, right, top, bottom, etc.)
         return data.sprite != null && data.sprite.name.StartsWith("grassland");

@@ -18,7 +18,6 @@ MonoBehaviour:
   prefab: {fileID: 7237833633244202622, guid: 674e29a913235cc559d54cac15e0e0a8, type: 3}
   width: 1
   height: 1
-  waterCost: 0
   woodCost: 20
   stoneCost: 20
   buildingType: 0
@@ -26,16 +25,15 @@ MonoBehaviour:
   productionRate: 1
   productionInterval: 1
   internalStorage: 0
-  producesWood: 0
-  woodProductionRate: 0
-  producesStone: 0
-  stoneProductionRate: 0
-  producesElectricity: 0
-  electricityProductionRate: 0
+  maxStorageCapacity: 0
+  maxPopulation: 5
   requiresWater: 1
   waterConsumptionRate: 0
   requiresElectricity: 1
   electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}

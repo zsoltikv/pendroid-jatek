@@ -26,10 +26,14 @@ MonoBehaviour:
   productionInterval: 1
   internalStorage: 1000
   maxStorageCapacity: 2000
+  maxPopulation: 20
   requiresWater: 0
   waterConsumptionRate: 0.1
   requiresElectricity: 0
   electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}

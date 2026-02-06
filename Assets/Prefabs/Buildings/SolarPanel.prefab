@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: -246471485
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.8679245, g: 0.7906678, b: 0.1432894, a: 1}
+  m_Sprite: {fileID: 2392851618101762770, guid: 0c95c8cd195e5e7f49763f800f0f1edb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,7 +103,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 8fc5dc3de753e039081d6d69a1245a87, type: 2}
   isConstructed: 0
-  currentWaterStorage: 0
+  isOperational: 1
+  maxStorageCapacity: 0
+  currentWoodStorage: 0
+  currentStoneStorage: 0
+  maxInternalStorageCapacity: 0
+  internalWaterStorage: 0
+  internalElectricityStorage: 0
+  destinations: []
+  distributionPanel: {fileID: 0}
 --- !u!61 &5472784649999009887
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140,9 +148,9 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.46, y: 0.2}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

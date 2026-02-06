@@ -17,7 +17,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   prefab: {fileID: 0}
   width: 1
-  height: 1
+  height: 2
   woodCost: 10
   stoneCost: 0
   buildingType: 1
@@ -26,10 +26,14 @@ MonoBehaviour:
   productionInterval: 1
   internalStorage: 5
   maxStorageCapacity: 20
+  maxPopulation: 2
   requiresWater: 1
   waterConsumptionRate: 0.5
   requiresElectricity: 0
   electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}

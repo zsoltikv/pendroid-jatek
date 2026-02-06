@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public enum BuildingType { None, Producer, Storage }
-public enum ProductionType { None, Water, Wood, Stone, Electricity }
+public enum BuildingType { None, Producer, Storage, Population }
+public enum ProductionType { None, Water, Wood, Stone, Electricity, Food }
 
 [CreateAssetMenu(fileName = "New Building", menuName = "City Builder/Building Data")]
 public class BuildingData : ScriptableObject
@@ -27,6 +27,9 @@ public class BuildingData : ScriptableObject
     public float productionInterval = 1f; // másodperc (1 tick = 1 mp)
     public float internalStorage; // maximum mennyiség, amit a gyár tárolhat a termeléshez
     public float maxStorageCapacity; // maximum mennyiség, amit a raktár tárolhat
+    
+    [Header("Population")]
+    public int maxPopulation = 0; // House: 5, TownHall: 20
 
 
     [Header("Requirements")]
@@ -34,8 +37,12 @@ public class BuildingData : ScriptableObject
     public float waterConsumptionRate;
     public bool requiresElectricity;
     public float electricityConsumptionRate; // áram/másodperc fogyasztás
+    public bool requiresFood;
+    public float foodConsumptionRate;
+    public float requiredFoodStorage;
     public float requiredWaterStorage;
     public float requiredElectricityStorage;
+    
     
     [Header("Visual")]
     public Color previewColor = new Color(0, 1, 0, 0.5f);

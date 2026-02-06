@@ -6,20 +6,31 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager instance;
     
     [Header("Resources")]
-    public float currentWater = 50f;
-    public float currentWood = 100f;
-    public float currentStone = 50f;
+    public float currentWater = 0f;
+    public float currentWood = 0f;
+    public float currentStone = 0f;
     public float currentElectricity = 0f;
     public float electricicy;
     
+    [Header("Population")]
+    public int currentPopulation = 0;
+    public int maxPopulation = 0;
+    
     [Header("Capacity")]
     public float maxWaterCapacity = 1000f;
+    public float maxWoodCapacity = 1000f;
+    public float maxStoneCapacity = 1000f;
+    public float maxElectricityCapacity = 1000f;
     
     // Eventek -- ui
     public event Action<float> OnWaterChanged;
     public event Action<float> OnWoodChanged;
     public event Action<float> OnStoneChanged;
     public event Action<float> OnElectricityChanged;
+    public event Action<int, int> OnPopulationChanged; // (current, max)
+    
+    private float populationTimer = 0f;
+    private const float populationGrowthInterval = 10f;
     
     private void Awake()
     {
@@ -39,6 +50,17 @@ public class ResourceManager : MonoBehaviour
         OnStoneChanged += UpdateStoneUI();
         OnElectricityChanged += UpdateElectricityUI();
         */
+    }
+    
+    private void Update()
+    {
+        populationTimer += Time.deltaTime;
+        
+        if (populationTimer >= populationGrowthInterval)
+        {
+            GrowPopulation();
+            populationTimer = 0f;
+        }
     }
     
     public void AddWater(float amount)
@@ -107,6 +129,50 @@ public class ResourceManager : MonoBehaviour
         ConsumeStone(building.stoneCost);
         
         return true;
+    }
+    
+    public void UpdateMaxPopulation()
+    {
+        maxPopulation = 0;
+        
+        if (BuildingManager.instance != null)
+        {
+            var buildings = BuildingManager.instance.GetAllBuildings();
+            foreach (var building in buildings)
+            {
+                if (building != null && building.isConstructed && building.data != null)
+                {
+                    maxPopulation += building.data.maxPopulation;
+                }
+            }
+        }
+        
+        // Ha a jelenlegi populáció több mint a max, csökkentjük
+        if (currentPopulation > maxPopulation)
+        {
+            currentPopulation = maxPopulation;
+        }
+        
+        OnPopulationChanged?.Invoke(currentPopulation, maxPopulation);
+    }
+    
+    private void GrowPopulation()
+    {
+        if (currentPopulation < maxPopulation)
+        {
+            currentPopulation++;
+            OnPopulationChanged?.Invoke(currentPopulation, maxPopulation);
+            Debug.Log($"Population grew: {currentPopulation}/{maxPopulation}");
+        }
+    }
+    
+    public void DecreasePopulation(int amount = 1)
+    {
+        if (currentPopulation > 0)
+        {
+            currentPopulation = Mathf.Max(0, currentPopulation - amount);
+            OnPopulationChanged?.Invoke(currentPopulation, maxPopulation);
+        }
     }
 
     

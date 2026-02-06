@@ -178,7 +178,12 @@ public class BuildingManager : MonoBehaviour
             isTownHallPlaced = true;
         }
         
-        Debug.Log($"Placed {selectedBuilding.buildingName} at grid position ({gridPos.x}, {gridPos.y})");
+        // Update max population
+        if (ResourceManager.instance != null)
+        {
+            ResourceManager.instance.UpdateMaxPopulation();
+        }
+
     }
     
     public void CancelPlacement()
@@ -208,5 +213,11 @@ public class BuildingManager : MonoBehaviour
         GridSystem.instance.RemoveBuilding(gridPos.x, gridPos.y, building.data.width, building.data.height);
         
         Destroy(building.gameObject);
+        
+        // Update max population
+        if (ResourceManager.instance != null)
+        {
+            ResourceManager.instance.UpdateMaxPopulation();
+        }
     }
 }

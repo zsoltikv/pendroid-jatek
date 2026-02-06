@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
 
     [Header("Event Timers")]
     public float minTimeBetweenEvents = 60f;
-    public float maxTimeBetweenEvents = 180f;
+    public float maxTimeBetweenEvents = 120f;
 
     [Header("Epidemic")]
     public float epidemicDuration = 45f;
@@ -51,16 +51,16 @@ public class EventManager : MonoBehaviour
             float wait = UnityEngine.Random.Range(minTimeBetweenEvents, maxTimeBetweenEvents);
             yield return new WaitForSeconds(wait);
 
-            int roll = UnityEngine.Random.Range(0, 3);
+            int roll = UnityEngine.Random.Range(0, 2);
             switch (roll)
             {
+                //case 0:
+                //    StartCoroutine(TriggerEpidemic());
+                //    break;
                 case 0:
-                    StartCoroutine(TriggerEpidemic());
-                    break;
-                case 1:
                     StartCoroutine(TriggerEarthquake());
                     break;
-                case 2:
+                case 1:
                     StartCoroutine(TriggerSolarFlare());
                     break;
             }
@@ -136,6 +136,9 @@ public class EventManager : MonoBehaviour
         foreach (var b in all)
         {
             if (b == null) continue;
+            
+            // Ne rombolják le a Town Hall-t
+            if (b.data.buildingName == "Town Hall") continue;
 
             if (UnityEngine.Random.value < destroyChance)
             {
@@ -153,6 +156,9 @@ public class EventManager : MonoBehaviour
         foreach (var b in all)
         {
             if (b == null) continue;
+            
+            // Csak azokat az épületeket érintse, amik áramot igényelnek
+            if (!b.data.requiresElectricity) continue;
 
             if (UnityEngine.Random.value < disableChance)
             {
