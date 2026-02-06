@@ -18,7 +18,6 @@ MonoBehaviour:
   prefab: {fileID: 2351412080264123641, guid: 5ed17851722ddf0e88402620742d9c68, type: 3}
   width: 1
   height: 1
-  waterCost: 0
   woodCost: 10
   stoneCost: 10
   buildingType: 1
@@ -26,12 +25,7 @@ MonoBehaviour:
   productionRate: 1
   productionInterval: 1
   internalStorage: 10
-  producesWood: 0
-  woodProductionRate: 0
-  producesStone: 0
-  stoneProductionRate: 0
-  producesElectricity: 0
-  electricityProductionRate: 0
+  maxStorageCapacity: 10
   requiresWater: 1
   waterConsumptionRate: 0.2
   requiresElectricity: 0
