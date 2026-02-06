@@ -9,14 +9,18 @@ public class ResourceManager : MonoBehaviour
     public float currentWater = 50f;
     public float currentWood = 100f;
     public float currentStone = 50f;
+    public float currentElectricity = 0f;
+    public float electricityNeeded = 0f;
+    public float currentFood = 0f;
     
     [Header("Capacity")]
     public float maxWaterCapacity = 1000f;
     
-    // Events
+    // Eventek -- ui
     public event Action<float> OnWaterChanged;
     public event Action<float> OnWoodChanged;
     public event Action<float> OnStoneChanged;
+    public event Action<float> OnElectricityChanged;
     
     private void Awake()
     {
@@ -30,28 +34,14 @@ public class ResourceManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
-        // Subscribe to weather events
-        if (WeatherController.instance != null)
-        {
-            WeatherController.instance.OnWaterCollected += AddWater;
-        }
-    }
-    
-    private void OnEnable()
-    {
-        if (WeatherController.instance != null)
-        {
-            WeatherController.instance.OnWaterCollected += AddWater;
-        }
-    }
-    
-    private void OnDisable()
-    {
-        if (WeatherController.instance != null)
-        {
-            WeatherController.instance.OnWaterCollected -= AddWater;
-        }
+
+
+        /* Majd ui-hoz
+        OnWaterChanged += UpdateWaterUI();
+        OnWoodChanged += UpdateWoodUI();
+        OnStoneChanged += UpdateStoneUI();
+        OnElectricityChanged += UpdateElectricityUI();
+        */
     }
     
     public void AddWater(float amount)
@@ -123,4 +113,6 @@ public class ResourceManager : MonoBehaviour
         
         return true;
     }
+
+    
 }

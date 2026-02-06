@@ -37,7 +37,6 @@ public class Building : MonoBehaviour
             }
         }
         
-        // Vízfogyasztás
         if (data.requiresWater)
         {
             float consumption = data.waterConsumptionRate * Time.deltaTime;
