@@ -90,15 +90,12 @@ public class BuildingManager : MonoBehaviour
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         
-        // Get the grid position where mouse is pointing
         Vector2Int gridPos = GridSystem.instance.GetGridPosition(mousePos);
         
-        // Calculate the center of the building area
         float cellSize = GridSystem.instance.cellSize;
         float buildingWidth = selectedBuilding.width * cellSize;
         float buildingHeight = selectedBuilding.height * cellSize;
         
-        // Position the preview so its center is at the center of the building area
         Vector3 worldPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
         worldPos.x += buildingWidth / 2f;
         worldPos.y += buildingHeight / 2f - cellSize;

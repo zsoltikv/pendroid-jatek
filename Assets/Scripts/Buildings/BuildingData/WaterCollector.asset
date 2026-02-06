@@ -21,10 +21,16 @@ MonoBehaviour:
   waterCost: 0
   woodCost: 0
   stoneCost: 0
-  producesWater: 1
-  waterProductionRate: 1
-  waterStorageCapacity: 500
+  buildingType: 1
+  productionType: 1
+  productionRate: 1
+  storageCapacity: 0
+  productionInterval: 1
   requiresWater: 0
   waterConsumptionRate: 0
+  requiresElectricity: 0
+  electricityConsumptionRate: 0
+  requiredWaterStorage: 0
+  requiredElectricityStorage: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}
