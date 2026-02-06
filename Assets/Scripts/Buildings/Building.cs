@@ -28,14 +28,6 @@ public class Building : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float productionTimer = 0f;
     private int maxDestinations;
-
-    public string GetDisplayName()
-    {
-        return data != null ? data.buildingName : "Unknown Building";
-    }
-
-    public BuildingRole role;
-    public ResourceType resourceType;
     
     private void Awake()
     {
