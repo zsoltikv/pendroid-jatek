@@ -85,7 +85,7 @@ public class ResourceManager : MonoBehaviour
 
     public void AddWater(float amount)
     {
-        townHallBuilding.internalWaterStorage = Mathf.Min(currentWater + amount, maxWaterCapacity);
+        townHallBuilding.internalWaterStorage = Mathf.Min(townHallBuilding.internalWaterStorage + amount, maxWaterCapacity);
         OnWaterChanged?.Invoke(townHallBuilding.internalWaterStorage);
     }
     

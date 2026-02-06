@@ -42,8 +42,10 @@ public class BuildingData : ScriptableObject
     public float requiredFoodStorage;
     public float requiredWaterStorage;
     public float requiredElectricityStorage;
-    
-    
+    public bool requiresStone = false;
+    public bool requiresWood = false;
+
+
     [Header("Visual")]
     public Color previewColor = new Color(0, 1, 0, 0.5f);
     public Color invalidPlacementColor = new Color(1, 0, 0, 0.5f);
