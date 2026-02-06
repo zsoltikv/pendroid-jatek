@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Project-Aqua.sln"
+    "dotnet.defaultSolution": "pendroid-jatek.sln"
 }
