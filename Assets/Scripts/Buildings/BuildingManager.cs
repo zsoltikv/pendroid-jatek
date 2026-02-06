@@ -8,6 +8,7 @@ public class BuildingManager : MonoBehaviour
     
     [Header("Building System")]
     public BuildingData selectedBuilding;
+    public bool isTownHallPlaced = false;
     public bool isPlacingBuilding = false;
     [Header("Preview")]
     private GameObject previewObject;
@@ -55,6 +56,12 @@ public class BuildingManager : MonoBehaviour
     public void SelectBuilding(BuildingData building)
     {
         selectedBuilding = building;
+        if (selectedBuilding.buildingName == "Town Hall" && isTownHallPlaced)
+        {
+            Debug.Log("Town Hall already placed!");
+            selectedBuilding = null;
+            return;
+        }
         isPlacingBuilding = true;
         CreatePreview();
     }
@@ -165,6 +172,11 @@ public class BuildingManager : MonoBehaviour
         
         // Update grid
         GridSystem.instance.PlaceBuilding(building, gridPos.x, gridPos.y, selectedBuilding.width, selectedBuilding.height);
+        
+        if (selectedBuilding.buildingName == "Town Hall")
+        {
+            isTownHallPlaced = true;
+        }
         
         Debug.Log($"Placed {selectedBuilding.buildingName} at grid position ({gridPos.x}, {gridPos.y})");
     }

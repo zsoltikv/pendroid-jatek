@@ -17,7 +17,6 @@ public class BuildingData : ScriptableObject
     public int height = 1;
 
     [Header("Costs")]
-    public int waterCost;
     public int woodCost;
     public int stoneCost;
 
@@ -26,16 +25,8 @@ public class BuildingData : ScriptableObject
     public ProductionType productionType;
     public float productionRate = 1f; // egység/tick
     public float productionInterval = 1f; // másodperc (1 tick = 1 mp)
-    public float internalStorage;
-
-    public bool producesWood;
-    public float woodProductionRate;
-
-    public bool producesStone;
-    public float stoneProductionRate;
-
-    public bool producesElectricity;
-    public float electricityProductionRate;
+    public float internalStorage; // maximum mennyiség, amit a gyár tárolhat a termeléshez
+    public float maxStorageCapacity; // maximum mennyiség, amit a raktár tárolhat
 
 
     [Header("Requirements")]

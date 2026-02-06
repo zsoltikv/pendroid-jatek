@@ -10,8 +10,7 @@ public class ResourceManager : MonoBehaviour
     public float currentWood = 100f;
     public float currentStone = 50f;
     public float currentElectricity = 0f;
-    public float electricityNeeded = 0f;
-    public float currentFood = 0f;
+    public float electricicy;
     
     [Header("Capacity")]
     public float maxWaterCapacity = 1000f;
@@ -34,9 +33,7 @@ public class ResourceManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-
-        /* Majd ui-hoz
+        /*
         OnWaterChanged += UpdateWaterUI();
         OnWoodChanged += UpdateWoodUI();
         OnStoneChanged += UpdateStoneUI();
@@ -97,8 +94,7 @@ public class ResourceManager : MonoBehaviour
     
     public bool HasEnoughResources(BuildingData building)
     {
-        return currentWater >= building.waterCost &&
-               currentWood >= building.woodCost &&
+        return currentWood >= building.woodCost &&
                currentStone >= building.stoneCost;
     }
     
@@ -107,7 +103,6 @@ public class ResourceManager : MonoBehaviour
         if (!HasEnoughResources(building))
             return false;
         
-        ConsumeWater(building.waterCost);
         ConsumeWood(building.woodCost);
         ConsumeStone(building.stoneCost);
         

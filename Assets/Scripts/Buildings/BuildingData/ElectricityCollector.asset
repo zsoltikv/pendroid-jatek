@@ -15,12 +15,12 @@ MonoBehaviour:
   buildingName: Solar Panel
   description: 
   icon: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 2351412080264123641, guid: 5ed17851722ddf0e88402620742d9c68, type: 3}
   width: 1
   height: 1
   waterCost: 0
-  woodCost: 0
-  stoneCost: 0
+  woodCost: 10
+  stoneCost: 10
   buildingType: 1
   productionType: 4
   productionRate: 1
