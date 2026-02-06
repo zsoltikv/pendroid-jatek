@@ -164,12 +164,12 @@ TextureImporter:
       name: pendroid
       rect:
         serializedVersion: 2
-        x: 39
+        x: 43
         y: 19
-        width: 400
-        height: 457
+        width: 393
+        height: 453
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
