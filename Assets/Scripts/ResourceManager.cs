@@ -4,6 +4,7 @@ using System;
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager instance;
+    public Building townHallBuilding;
     
     [Header("Resources")]
     public float currentWater = 50f;
@@ -40,7 +41,17 @@ public class ResourceManager : MonoBehaviour
         OnElectricityChanged += UpdateElectricityUI();
         */
     }
-    
+
+    void FixedUpdate()
+    {
+        if (townHallData != null)
+        {
+            currentWater = townHallBuilding.internalWaterStorage;
+            currentWood = townHallBuilding.currentWoodStorage;
+            currentStone = townHallBuilding.currentStoneStorage;
+        }
+    }
+
     public void AddWater(float amount)
     {
         currentWater = Mathf.Min(currentWater + amount, maxWaterCapacity);
