@@ -103,7 +103,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5c02597f13021a40d8b775613315c5dc, type: 2}
   isConstructed: 0
-  currentWaterStorage: 0
+  isOperational: 1
+  maxStorageCapacity: 2000
+  currentWoodStorage: 200
+  currentStoneStorage: 200
+  currentFoodStorage: 100
+  maxInternalStorageCapacity: 2000
+  internalWaterStorage: 0
+  internalElectricityStorage: 0
+  internalFoodStorage: 0
+  destinations: []
+  distributionPanel: {fileID: 0}
 --- !u!61 &1866200256753987879
 BoxCollider2D:
   m_ObjectHideFlags: 0
