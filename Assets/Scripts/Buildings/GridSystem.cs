@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GridSystem : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GridSystem : MonoBehaviour
     public int gridHeight = 50;
     public float cellSize = 1f;
     public Vector2 gridOrigin = Vector2.zero;
+    public Tilemap groundTilemap;
     
     [Header("Visual")]
     public bool showGrid = true;
@@ -30,6 +32,10 @@ public class GridSystem : MonoBehaviour
         }
         
         InitializeGrid();
+        if (groundTilemap == null)
+        {
+            groundTilemap = FindObjectOfType<Tilemap>();
+        }
     }
     
     private void InitializeGrid()
@@ -67,6 +73,11 @@ public class GridSystem : MonoBehaviour
             {
                 if (occupiedCells[x + dx, y + dy])
                     return false;
+                
+                // Check if all cells have grassland_center tile underneath
+                Vector3 worldPos = GetWorldPosition(x + dx, y + dy);
+                if (!IsGrasslandCenter(worldPos))
+                    return false;
             }
         }
         
@@ -89,6 +100,26 @@ public class GridSystem : MonoBehaviour
         }
         
         return true;
+    }
+
+    bool IsGrasslandCenter(Vector3 worldPos, string expectedName = "grassland_center")
+    {
+        if (groundTilemap == null) return false;
+
+        Vector3Int cellPos = groundTilemap.WorldToCell(worldPos);
+        var tile = groundTilemap.GetTile(cellPos);
+        if (tile == null) return false;
+
+        var data = new TileData();
+        tile.GetTileData(cellPos, groundTilemap, ref data);
+
+        if (data.sprite != null)
+        {
+            Debug.Log($"Tile sprite name at {cellPos}: {data.sprite.name}");
+        }
+        
+        // Allow any grassland tile (center, left, right, top, bottom, etc.)
+        return data.sprite != null && data.sprite.name.StartsWith("grassland");
     }
     
     public void RemoveBuilding(int x, int y, int width, int height)

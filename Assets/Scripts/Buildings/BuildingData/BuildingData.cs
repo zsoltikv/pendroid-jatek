@@ -23,10 +23,19 @@ public class BuildingData : ScriptableObject
     public bool producesWater;
     public float waterProductionRate; // víz/másodperc (csak esőben)
     public float waterStorageCapacity;
+    public bool producesWood;
+    public float woodProductionRate; // fa/másodperc
+    public bool producesStone;
+    public float stoneProductionRate; // kő/másodperc
+    public bool producesElectricity;
+    public float electricityProductionRate; // áram/másodperc
+
     
     [Header("Requirements")]
     public bool requiresWater; // Szükséges-e víz a működéshez
     public float waterConsumptionRate; // víz/másodperc fogyasztás
+    public bool requiresElectricity;
+    public float electricityConsumptionRate; // áram/másodperc fogyasztás
     
     [Header("Visual")]
     public Color previewColor = new Color(0, 1, 0, 0.5f); // Zöld átlátszó alapértelmezetten

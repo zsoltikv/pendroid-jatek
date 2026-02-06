@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
 public class BuildingManager : MonoBehaviour
@@ -8,7 +9,6 @@ public class BuildingManager : MonoBehaviour
     [Header("Building System")]
     public BuildingData selectedBuilding;
     public bool isPlacingBuilding = false;
-    
     [Header("Preview")]
     private GameObject previewObject;
     private SpriteRenderer previewRenderer;
@@ -90,16 +90,21 @@ public class BuildingManager : MonoBehaviour
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         
+        // Get the grid position where mouse is pointing
         Vector2Int gridPos = GridSystem.instance.GetGridPosition(mousePos);
-        Vector3 snappedPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
         
-        // Center the preview based on building size
-        snappedPos.x += (selectedBuilding.width * GridSystem.instance.cellSize) / 2f;
-        snappedPos.y += (selectedBuilding.height * GridSystem.instance.cellSize) / 2f;
+        // Calculate the center of the building area
+        float cellSize = GridSystem.instance.cellSize;
+        float buildingWidth = selectedBuilding.width * cellSize;
+        float buildingHeight = selectedBuilding.height * cellSize;
         
-        previewObject.transform.position = snappedPos;
+        // Position the preview so its center is at the center of the building area
+        Vector3 worldPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
+        worldPos.x += buildingWidth / 2f;
+        worldPos.y += buildingHeight / 2f - cellSize;
         
-        // Update color based on placement validity
+        previewObject.transform.position = worldPos;
+        
         bool canPlace = CanPlaceBuilding(gridPos.x, gridPos.y);
         if (previewRenderer != null)
         {
@@ -112,11 +117,11 @@ public class BuildingManager : MonoBehaviour
         if (GridSystem.instance == null || selectedBuilding == null)
             return false;
         
-        // Check grid validity
+        // griden jó-e?
         if (!GridSystem.instance.IsPositionValid(x, y, selectedBuilding.width, selectedBuilding.height))
             return false;
         
-        // Check resources
+        // Cvan-e elég nyersanyag?
         if (ResourceManager.instance != null && !ResourceManager.instance.HasEnoughResources(selectedBuilding))
             return false;
         
@@ -136,19 +141,22 @@ public class BuildingManager : MonoBehaviour
             return;
         }
         
-        // Spend resources
         if (ResourceManager.instance != null && !ResourceManager.instance.SpendResources(selectedBuilding))
         {
             Debug.Log("Not enough resources!");
             return;
         }
         
-        // Place building on grid
-        Vector3 buildingPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
-        buildingPos.x += (selectedBuilding.width * GridSystem.instance.cellSize) / 2f;
-        buildingPos.y += (selectedBuilding.height * GridSystem.instance.cellSize) / 2f;
+        // Calculate the center of the building area (same as preview)
+        float cellSize = GridSystem.instance.cellSize;
+        float buildingWidth = selectedBuilding.width * cellSize;
+        float buildingHeight = selectedBuilding.height * cellSize;
         
-        GameObject buildingObj = Instantiate(selectedBuilding.prefab, buildingPos, Quaternion.identity);
+        Vector3 worldPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
+        worldPos.x += buildingWidth / 2f;
+        worldPos.y += buildingHeight / 2f - cellSize;
+        
+        GameObject buildingObj = Instantiate(selectedBuilding.prefab, worldPos, Quaternion.identity);
         Building building = buildingObj.GetComponent<Building>();
         
         if (building != null)

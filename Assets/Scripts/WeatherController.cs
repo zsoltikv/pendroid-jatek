@@ -44,7 +44,7 @@ public class WeatherController : MonoBehaviour
     
     // Events
     public event Action<WeatherType> OnWeatherChanged;
-    public event Action<float> OnWaterCollected;
+
     
     public enum WeatherType
     {
@@ -86,7 +86,6 @@ public class WeatherController : MonoBehaviour
         
         if (currentWeather == WeatherType.Dry)
         {
-            // After dry period, decide between rain, storm, or more dry
             float roll = UnityEngine.Random.Range(0f, 1f);
             
             if (roll < stormProbability)
