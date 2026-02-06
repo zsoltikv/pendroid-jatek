@@ -528,6 +528,7 @@ MonoBehaviour:
   gridHeight: 50
   cellSize: 1
   gridOrigin: {x: -20, y: -20}
+  groundTilemap: {fileID: 0}
   showGrid: 1
   gridColor: {r: 1, g: 1, b: 1, a: 0.2}
 --- !u!1 &429064561
@@ -875,7 +876,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1200}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
