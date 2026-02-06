@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Quarry
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: -2526441783993872806, guid: 226ee8aa35e1ee12d88a74da53156590, type: 3}
   prefab: {fileID: 1780605500093066794, guid: badc8ff2a9021e29db6dd437309c7665, type: 3}
   width: 1
   height: 1
@@ -36,5 +36,7 @@ MonoBehaviour:
   requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
+  requiresStone: 0
+  requiresWood: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Townhall
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: -8457540242517696031, guid: 288e0c5c40332894cac96ef903a126e2, type: 3}
   prefab: {fileID: 8037044262988411001, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
   width: 4
   height: 2
@@ -27,6 +27,7 @@ MonoBehaviour:
   internalStorage: 1000
   maxStorageCapacity: 2000
   maxPopulation: 20
+<<<<<<< HEAD
   requiresWater: 1
   waterConsumptionRate: 1
   requiresElectricity: 1
@@ -36,5 +37,18 @@ MonoBehaviour:
   requiredFoodStorage: 100
   requiredWaterStorage: 100
   requiredElectricityStorage: 100
+=======
+  requiresWater: 0
+  waterConsumptionRate: 0.1
+  requiresElectricity: 0
+  electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
+  requiredWaterStorage: 0
+  requiredElectricityStorage: 0
+  requiresStone: 1
+  requiresWood: 1
+>>>>>>> 16880ee789c1690f01e79e22ab65f666569c9c75
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}

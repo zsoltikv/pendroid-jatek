@@ -13,6 +13,14 @@ public class DistributionPanel : MonoBehaviour
     public Transform destinationSlotsContainer;
     public GameObject destinationSlotPrefab;
 
+    public GameObject producerRoot;
+    public GameObject storageRoot;
+
+    public TextMeshProUGUI woodStorageText;
+    public TextMeshProUGUI stoneStorageText;
+    public TextMeshProUGUI electricityStorageText;
+    public TextMeshProUGUI waterStorageText;
+
     [Header("Current Building")]
     private Building currentBuilding;
     private List<DestinationSlot> destinationSlots = new List<DestinationSlot>();
@@ -36,11 +44,42 @@ public class DistributionPanel : MonoBehaviour
         panel.SetActive(false);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (currentBuilding != null)
         {
-            internalCapacityText.text = $"Capacity: {(currentBuilding.data.productionType == ProductionType.Electricity ? currentBuilding.internalElectricityStorage : currentBuilding.internalWaterStorage)} / {currentBuilding.maxInternalStorageCapacity}";
+            if (currentBuilding.data.buildingType == BuildingType.Producer)
+            {
+                switch (currentBuilding.data.productionType)
+                {
+                    case ProductionType.None:
+                        break;
+                    case ProductionType.Water:
+                        internalCapacityText.text = $"Capacity: {currentBuilding.internalWaterStorage} / {currentBuilding.maxInternalStorageCapacity}";
+                        break;
+                    case ProductionType.Wood:
+                        internalCapacityText.text = $"Capacity: {currentBuilding.currentWoodStorage} / {currentBuilding.maxStorageCapacity}";
+                        break;
+                    case ProductionType.Stone:
+                        internalCapacityText.text = $"Capacity: {currentBuilding.currentStoneStorage} / {currentBuilding.maxStorageCapacity}";
+                        break;
+                    case ProductionType.Electricity:
+                        internalCapacityText.text = $"Capacity: {currentBuilding.internalElectricityStorage} / {currentBuilding.maxInternalStorageCapacity}";
+                        break;
+                    case ProductionType.Food:
+                        internalCapacityText.text = $"Capacity: {currentBuilding.currentFoodStorage} / {currentBuilding.maxStorageCapacity}";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (currentBuilding.data.buildingType == BuildingType.Storage)
+            {
+                woodStorageText.text = $"Wood: {currentBuilding.currentWoodStorage}";
+                stoneStorageText.text = $"Stone: {currentBuilding.currentStoneStorage}";
+                waterStorageText.text = $"Water: {currentBuilding.internalWaterStorage}";
+                waterStorageText.text = $"Water: {currentBuilding.internalElectricityStorage}";
+            }
         }
     }
 
@@ -53,7 +92,11 @@ public class DistributionPanel : MonoBehaviour
 
         buildingNameText.text = building.data.buildingName;
 
-        CreateDestinationSlots();
+        if (currentBuilding.data.buildingType == BuildingType.Producer)
+            CreateDestinationSlots();
+
+        storageRoot.SetActive(currentBuilding.data.buildingType == BuildingType.Storage);
+        producerRoot.SetActive(currentBuilding.data.buildingType == BuildingType.Producer);
     }
 
     public void ClosePanel()
@@ -156,8 +199,9 @@ public class DistributionPanel : MonoBehaviour
             case ProductionType.Electricity:
                 return building.data.requiresElectricity;
             case ProductionType.Wood:
+                return building.data.requiresWood;
             case ProductionType.Stone:
-                return false;
+                return building.data.requiresStone;
             default:
                 return false;
         }

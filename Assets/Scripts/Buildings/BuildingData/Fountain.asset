@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Fountain
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 2579855346858846629, guid: bc50795d16512254ca3f79adf0fe16a2, type: 3}
   prefab: {fileID: 7599516168563365489, guid: c5056b721257118439dfd46b2b02f59d, type: 3}
   width: 1
   height: 1
@@ -26,11 +26,17 @@ MonoBehaviour:
   productionInterval: 1
   internalStorage: 0
   maxStorageCapacity: 0
+  maxPopulation: 0
   requiresWater: 0
   waterConsumptionRate: 0
   requiresElectricity: 0
   electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
+  requiresStone: 0
+  requiresWood: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}
