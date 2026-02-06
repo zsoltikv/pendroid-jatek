@@ -24,8 +24,14 @@ MonoBehaviour:
   buildingType: 1
   productionType: 1
   productionRate: 1
-  storageCapacity: 0
   productionInterval: 1
+  internalStorage: 10
+  producesWood: 0
+  woodProductionRate: 0
+  producesStone: 0
+  stoneProductionRate: 0
+  producesElectricity: 0
+  electricityProductionRate: 0
   requiresWater: 0
   waterConsumptionRate: 0
   requiresElectricity: 0
