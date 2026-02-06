@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Resources;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BuildingManager : MonoBehaviour
     
     [Header("Building System")]
     public BuildingData selectedBuilding;
+    public BuildingData townHallData;
     public bool isTownHallPlaced = false;
     public bool isPlacingBuilding = false;
     [Header("Preview")]
@@ -34,6 +36,58 @@ public class BuildingManager : MonoBehaviour
         
         if (mainCamera == null)
             mainCamera = Camera.main;
+    }
+
+    private void Start()
+    {
+        if (townHallData != null && !isTownHallPlaced)
+        {
+            PlaceInitialTownHall();
+            ResourceManager.instance.currentPopulation = 20;
+        }
+    }
+
+    private void PlaceInitialTownHall()
+    {
+        // Calculate center position of the grid
+        int centerX = (GridSystem.instance.gridWidth - townHallData.width) / 2 - 5;
+        int centerY = (GridSystem.instance.gridHeight - townHallData.height) / 2 - 5;
+        Vector2Int gridPos = new Vector2Int(centerX, centerY);
+        
+        float cellSize = GridSystem.instance.cellSize;
+        float buildingWidth = townHallData.width * cellSize;
+        float buildingHeight = townHallData.height * cellSize;
+
+        Vector3 worldPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
+        worldPos.x += buildingWidth / 2f;
+        worldPos.y += buildingHeight / 2f - cellSize;
+
+        GameObject buildingObj = Instantiate(townHallData.prefab, worldPos, Quaternion.identity);
+        Building building = buildingObj.GetComponent<Building>();
+
+        if (building != null)
+        {
+            building.data = townHallData;
+            building.Construct();
+            allBuildings.Add(building);
+            
+            // Set as Town Hall reference in ResourceManager
+            if (ResourceManager.instance != null)
+            {
+                ResourceManager.instance.townHallBuilding = building;
+            }
+        }
+
+        GridSystem.instance.PlaceBuilding(building, gridPos.x, gridPos.y, townHallData.width, townHallData.height);
+        isTownHallPlaced = true;
+
+        // Update max population
+        if (ResourceManager.instance != null)
+        {
+            ResourceManager.instance.UpdateMaxPopulation();
+        }
+        
+        Debug.Log($"Initial Town Hall placed at grid center ({centerX}, {centerY})");
     }
 
     private void Update()

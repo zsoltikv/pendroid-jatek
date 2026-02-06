@@ -104,11 +104,11 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 5c02597f13021a40d8b775613315c5dc, type: 2}
   isConstructed: 0
   isOperational: 1
-  maxStorageCapacity: 0
-  currentWoodStorage: 0
-  currentStoneStorage: 0
-  currentFoodStorage: 0
-  maxInternalStorageCapacity: 0
+  maxStorageCapacity: 2000
+  currentWoodStorage: 200
+  currentStoneStorage: 200
+  currentFoodStorage: 100
+  maxInternalStorageCapacity: 2000
   internalWaterStorage: 0
   internalElectricityStorage: 0
   internalFoodStorage: 0

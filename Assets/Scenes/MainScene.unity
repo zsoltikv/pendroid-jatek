@@ -1581,6 +1581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedBuilding: {fileID: 0}
+  townHallData: {fileID: 11400000, guid: 5c02597f13021a40d8b775613315c5dc, type: 2}
   isTownHallPlaced: 0
   isPlacingBuilding: 0
   mainCamera: {fileID: 519420031}
@@ -1814,90 +1815,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &765995272
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.7726121
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.84894544
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: isConstructed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: currentWoodStorage
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: currentStoneStorage
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: internalWaterStorage
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8037044262988411001, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-      propertyPath: m_Name
-      value: TownHall
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
---- !u!114 &765995273 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-  m_PrefabInstance: {fileID: 765995272}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c7b6a77bff232fdb2ade1c713fa382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &815088786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3231,7 +3148,6 @@ MonoBehaviour:
   container: {fileID: 215618136}
   BuildOption: {fileID: 8482087556160825750, guid: 7e0f19483ab300319a547f5f9134973f, type: 3}
   buildingOptions:
-  - {fileID: 11400000, guid: 5c02597f13021a40d8b775613315c5dc, type: 2}
   - {fileID: 11400000, guid: c42b85880dbaf740994eb5150e6da62b, type: 2}
   - {fileID: 11400000, guid: 1a0b54358c772e9ce8762a19d9a20905, type: 2}
   - {fileID: 11400000, guid: c788410586329d385ac704dab2d0861c, type: 2}
@@ -3898,10 +3814,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcffb1b832b631a9b95b9a56f9da3994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  townHallBuilding: {fileID: 765995273}
+  townHallBuilding: {fileID: 0}
   waterText: {fileID: 621911421}
   woodText: {fileID: 1259823459}
   stoneText: {fileID: 2051092493}
+  PopulationText: {fileID: 1417375038}
   currentWater: 0
   currentWood: 0
   currentStone: 0
@@ -29514,6 +29431,5 @@ SceneRoots:
   - {fileID: 1686310841}
   - {fileID: 1929150094}
   - {fileID: 665644536}
-  - {fileID: 765995272}
   - {fileID: 1154457228}
   - {fileID: 1419408162}

@@ -10,6 +10,7 @@ public class ResourceManager : MonoBehaviour
     public TMP_Text waterText;
     public TMP_Text woodText;
     public TMP_Text stoneText;
+    public TMP_Text PopulationText;
 
     [Header("Resources")]
     public float currentWater = 0f;
@@ -81,6 +82,7 @@ public class ResourceManager : MonoBehaviour
         waterText.text = $"Water: {currentWater}";
         woodText.text = $"Wood: {currentWood}";
         stoneText.text = $"Stone: {currentStone}";
+        PopulationText.text = $"Population: {currentPopulation}/{maxPopulation}";
     }
 
     public void AddWater(float amount)
