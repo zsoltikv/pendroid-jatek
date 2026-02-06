@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Globalization;
 
 public class PanelToggleButton : MonoBehaviour
 {
     [Header("Panel object (UI)")]
     public GameObject panel;
+    public GameObject container;
+    public GameObject BuildOption;
+    public BuildingData[] buildingOptions; 
 
     [Header("Optional (ha nem Overlay a Canvas)")]
     public Canvas canvas; 
@@ -19,6 +25,45 @@ public class PanelToggleButton : MonoBehaviour
 
         if (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceOverlay)
             uiCamera = null;
+    }
+    
+    private void Start()
+    {
+        // Betöltjük az összes BuildingData asset-et
+        
+        // Ha nincs container vagy BuildOption prefab, nem csinálunk semmit
+        if (container == null || BuildOption == null)
+        {
+            Debug.LogWarning("Container vagy BuildOption prefab nincs beállítva!");
+            return;
+        }
+        
+        // Minden BuildingData-hoz létrehozunk egy BuildOption példányt
+        foreach (BuildingData buildingData in buildingOptions)
+        {
+            GameObject option = Instantiate(BuildOption, container.transform);
+            
+            // Lokális változó a closure probléma elkerüléséhez
+            BuildingData currentBuilding = buildingData;
+            
+            // Itt beállíthatod a BuildOption komponenst, ha van rajta
+            var button = option.GetComponentInChildren<Button>();
+            if (button != null)
+            {
+                button.onClick.AddListener(() => {
+                    BuildingManager.instance.SelectBuilding(currentBuilding);
+                    Hide();
+                });
+            }
+
+
+            option.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = currentBuilding.buildingName; // Feltételezve, hogy a név a gyerek Text komponensben van
+            if (currentBuilding.woodCost > 0)
+                option.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text += $"Wood: {currentBuilding.woodCost}\n";
+            if (currentBuilding.stoneCost > 0)
+                option.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text += $"Stone: {currentBuilding.stoneCost}";
+            option.SetActive(true);
+        }
     }
 
     private void Update()
