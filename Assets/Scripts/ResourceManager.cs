@@ -1,11 +1,16 @@
 using UnityEngine;
 using System;
+using TMPro;
 
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager instance;
     public Building townHallBuilding;
-    
+
+    public TMP_Text waterText;
+    public TMP_Text woodText;
+    public TMP_Text stoneText;
+
     [Header("Resources")]
     public float currentWater = 50f;
     public float currentWood = 100f;
@@ -44,26 +49,30 @@ public class ResourceManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (townHallData != null)
+        if (townHallBuilding != null)
         {
             currentWater = townHallBuilding.internalWaterStorage;
             currentWood = townHallBuilding.currentWoodStorage;
             currentStone = townHallBuilding.currentStoneStorage;
         }
+
+        waterText.text = $"Water: {currentWater}";
+        woodText.text = $"Wood: {currentWood}";
+        stoneText.text = $"Stone: {currentStone}";
     }
 
     public void AddWater(float amount)
     {
-        currentWater = Mathf.Min(currentWater + amount, maxWaterCapacity);
-        OnWaterChanged?.Invoke(currentWater);
+        townHallBuilding.internalWaterStorage = Mathf.Min(currentWater + amount, maxWaterCapacity);
+        OnWaterChanged?.Invoke(townHallBuilding.internalWaterStorage);
     }
     
     public bool ConsumeWater(float amount)
     {
-        if (currentWater >= amount)
+        if (townHallBuilding.internalWaterStorage >= amount)
         {
-            currentWater -= amount;
-            OnWaterChanged?.Invoke(currentWater);
+            townHallBuilding.internalWaterStorage -= amount;
+            OnWaterChanged?.Invoke(townHallBuilding.internalWaterStorage);
             return true;
         }
         return false;
@@ -71,16 +80,16 @@ public class ResourceManager : MonoBehaviour
     
     public void AddWood(float amount)
     {
-        currentWood += amount;
-        OnWoodChanged?.Invoke(currentWood);
+        townHallBuilding.currentWoodStorage += amount;
+        OnWoodChanged?.Invoke(townHallBuilding.currentWoodStorage);
     }
     
     public bool ConsumeWood(float amount)
     {
-        if (currentWood >= amount)
+        if (townHallBuilding.currentWoodStorage >= amount)
         {
-            currentWood -= amount;
-            OnWoodChanged?.Invoke(currentWood);
+            townHallBuilding.currentWoodStorage -= amount;
+            OnWoodChanged?.Invoke(townHallBuilding.currentWoodStorage);
             return true;
         }
         return false;
@@ -88,16 +97,16 @@ public class ResourceManager : MonoBehaviour
     
     public void AddStone(float amount)
     {
-        currentStone += amount;
-        OnStoneChanged?.Invoke(currentStone);
+        townHallBuilding.currentStoneStorage += amount;
+        OnStoneChanged?.Invoke(townHallBuilding.currentStoneStorage);
     }
     
     public bool ConsumeStone(float amount)
     {
-        if (currentStone >= amount)
+        if (townHallBuilding.currentStoneStorage >= amount)
         {
-            currentStone -= amount;
-            OnStoneChanged?.Invoke(currentStone);
+            townHallBuilding.currentStoneStorage -= amount;
+            OnStoneChanged?.Invoke(townHallBuilding.currentStoneStorage);
             return true;
         }
         return false;
@@ -105,8 +114,8 @@ public class ResourceManager : MonoBehaviour
     
     public bool HasEnoughResources(BuildingData building)
     {
-        return currentWood >= building.woodCost &&
-               currentStone >= building.stoneCost;
+        return townHallBuilding.currentWoodStorage >= building.woodCost &&
+               townHallBuilding.currentStoneStorage >= building.stoneCost;
     }
     
     public bool SpendResources(BuildingData building)

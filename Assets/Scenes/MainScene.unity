@@ -1425,6 +1425,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &765995272
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7726121
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.84894544
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327208147374244916, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: isConstructed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: currentWoodStorage
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: currentStoneStorage
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: internalWaterStorage
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037044262988411001, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+      propertyPath: m_Name
+      value: TownHall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+--- !u!114 &765995273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1545007185088569319, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
+  m_PrefabInstance: {fileID: 765995272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c7b6a77bff232fdb2ade1c713fa382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &815088786
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,7 +3061,7 @@ MonoBehaviour:
         m_MethodName: SelectBuilding
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: be7d25ee64b616f4384324faa83fc0d8, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 8fc5dc3de753e039081d6d69a1245a87, type: 2}
           m_ObjectArgumentAssemblyTypeName: BuildingData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3160,9 +3244,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcffb1b832b631a9b95b9a56f9da3994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWater: 50
-  currentWood: 10000
-  currentStone: 10000
+  townHallBuilding: {fileID: 765995273}
+  waterText: {fileID: 621911421}
+  woodText: {fileID: 1259823459}
+  stoneText: {fileID: 2051092493}
+  currentWater: 0
+  currentWood: 0
+  currentStone: 0
   currentElectricity: 0
   electricicy: 0
   maxWaterCapacity: 1000
@@ -28632,3 +28720,4 @@ SceneRoots:
   - {fileID: 1929150094}
   - {fileID: 665644536}
   - {fileID: 1154457228}
+  - {fileID: 765995272}
