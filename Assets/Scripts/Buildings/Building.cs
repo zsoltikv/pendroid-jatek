@@ -6,6 +6,7 @@ public class Building : MonoBehaviour
     
     [Header("Current State")]
     public bool isConstructed = false;
+    public bool isOperational = true;
     public float currentWaterStorage = 0f;
     
     private SpriteRenderer spriteRenderer;
@@ -19,6 +20,7 @@ public class Building : MonoBehaviour
     private void Update()
     {
         if (!isConstructed) return;
+        if (!isOperational) return;
         
 
         if (data.producesWater && WeatherController.instance.IsRaining())
@@ -37,7 +39,6 @@ public class Building : MonoBehaviour
             }
         }
         
-        // Vízfogyasztás
         if (data.requiresWater)
         {
             float consumption = data.waterConsumptionRate * Time.deltaTime;
