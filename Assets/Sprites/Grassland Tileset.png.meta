@@ -3525,7 +3525,6 @@ TextureImporter:
       Grassland Tileset_84: 3437674041177306252
       Grassland Tileset_85: 7796160561154351108
       Grassland Tileset_86: -217899831676141765
-      Grassland Tileset_87: 3233759150960736101
       Grassland Tileset_88: -1209397082038495886
       Grassland Tileset_89: -621436609672450960
       Grassland Tileset_9: -7481337024795054456
@@ -3546,6 +3545,7 @@ TextureImporter:
       grassland_bottom: -318594275
       grassland_bright: -1801226829
       grassland_center: -3468335221829518024
+      grassland_ctleft: 3233759150960736101
       grassland_left: -151416992
       grassland_right: 1134858449
       grassland_tleft: 2074720695
