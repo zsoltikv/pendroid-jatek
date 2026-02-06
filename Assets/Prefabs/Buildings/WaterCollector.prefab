@@ -103,7 +103,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c73532914f633c30ea157ed6cd84eb0e, type: 2}
   isConstructed: 0
+  isOperational: 1
+  maxStorageCapacity: 20
   currentWaterStorage: 0
+  currentWoodStorage: 0
+  currentStoneStorage: 0
+  currentElectricityStorage: 0
+  internalWaterStorage: 0
+  internalElectricityStorage: 0
+  destinations: []
 --- !u!61 &4271034587040093446
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,7 +146,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0008357763, y: -0.00027857348}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -148,5 +156,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.1477536, y: 0.14886796}
   m_EdgeRadius: 0

@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.AccessControl;
 using UnityEngine;
 
 public class Building : MonoBehaviour
 {
     public BuildingData data;
-    
+
     [Header("Current State")]
     public bool isConstructed = false;
     public bool isOperational = true;
-    
+
     [Header("Storage")]
     public float maxStorageCapacity;
     public float currentWoodStorage = 0f;
@@ -22,15 +23,32 @@ public class Building : MonoBehaviour
     
     [Header("Destinations")]
     public List<Building> destinations = new List<Building>();
-    
+
     private SpriteRenderer spriteRenderer;
     private float productionTimer = 0f;
     private int maxDestinations;
-    
+
+    public DistributionPanel distributionPanel;
+
+    private void OnMouseDown()
+    {
+        if (!isConstructed) return;
+
+        if (distributionPanel == null)
+        {
+            distributionPanel = GameObject.FindObjectsByType<DistributionPanel>(FindObjectsSortMode.None).FirstOrDefault();
+        }
+
+        if (distributionPanel != null)
+        {
+            distributionPanel.OpenPanel(this);
+        }
+    }
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         if (data != null)
         {
             maxDestinations = data.buildingType == BuildingType.Storage ? 4 : 2;
@@ -55,7 +73,6 @@ public class Building : MonoBehaviour
         
         isOperational = true;
         
-        // Tick-based production and distribution
         productionTimer += Time.deltaTime;
         if (productionTimer >= data.productionInterval)
         {
