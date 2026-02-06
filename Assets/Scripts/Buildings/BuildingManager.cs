@@ -258,7 +258,9 @@ public class BuildingManager : MonoBehaviour
         {
             ResourceManager.instance.UpdateMaxPopulation();
         }
-
+        
+        // Épület lerakása után töröljük a kiválasztást
+        CancelPlacement();
     }
 
     public void CancelPlacement()

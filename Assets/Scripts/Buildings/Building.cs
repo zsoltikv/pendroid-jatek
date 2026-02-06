@@ -15,7 +15,6 @@ public class Building : MonoBehaviour
     public float maxStorageCapacity;
     public float currentWoodStorage = 0f;
     public float currentStoneStorage = 0f;
-    public float currentFoodStorage = 0f;
     
     [Header("Internal Supply Storage")]
     public float maxInternalStorageCapacity = 0f;
@@ -68,13 +67,38 @@ public class Building : MonoBehaviour
     {
         if (!isConstructed) return;
         
-        if (!HasEnoughInternalResources() || IsStorageFull())
+        if (!HasEnoughInternalResources())
         {
             isOperational = false;
+            UpdateBuildingColor();
+            
+            // Ha Population vagy Storage (Town Hall) és nem operational, csökken a lakosság
+            if (data.buildingType == BuildingType.Population || data.buildingType == BuildingType.Storage)
+            {
+                productionTimer += Time.deltaTime;
+                if (productionTimer >= 5f) // Minden 5 másodpercben csökken
+                {
+                    if (ResourceManager.instance != null)
+                    {
+                        ResourceManager.instance.DecreasePopulation(1);
+                        Debug.LogWarning($"{data.buildingName} is not operational! Population decreased.");
+                    }
+                    productionTimer = 0f;
+                }
+            }
+            
+            return;
+        }
+
+        if (data.buildingType == BuildingType.Producer)
+        {
+            isOperational = true;
+            UpdateBuildingColor();
             return;
         }
         
         isOperational = true;
+        UpdateBuildingColor();
         
         productionTimer += Time.deltaTime;
         if (productionTimer >= data.productionInterval)
@@ -335,6 +359,20 @@ public class Building : MonoBehaviour
         }
         
         Debug.Log($"{data.buildingName} constructed at {transform.position}");
+    }
+    
+    private void UpdateBuildingColor()
+    {
+        if (spriteRenderer == null) return;
+        
+        if (!isOperational)
+        {
+            spriteRenderer.color = Color.red;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
     
     

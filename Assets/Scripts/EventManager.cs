@@ -20,7 +20,10 @@ public class EventManager : MonoBehaviour
 
     [Header("Solar Flare")]
     public float solarFlareDuration = 30f;
-    public float solarDisableChance = 0.5f; 
+    public float solarDisableChance = 0.5f;
+    
+    [Header("UI")]
+    public TMPro.TMP_Text eventMessageText;
 
     public event Action<string> OnEventStarted;
     public event Action<string> OnEventEnded;
@@ -88,6 +91,13 @@ public class EventManager : MonoBehaviour
     {
         Debug.Log("Earthquake occurred");
         OnEventStarted?.Invoke("Earthquake");
+        
+        // Display message
+        if (eventMessageText != null)
+        {
+            eventMessageText.text = "An earthquake struck your city";
+            eventMessageText.gameObject.SetActive(true);
+        }
 
         TryDamageBuildings(earthquakeDamageChance);
 
@@ -95,12 +105,25 @@ public class EventManager : MonoBehaviour
 
         Debug.Log("Earthquake ended");
         OnEventEnded?.Invoke("Earthquake");
+        
+        // Hide message
+        if (eventMessageText != null)
+        {
+            eventMessageText.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator TriggerSolarFlare()
     {
         Debug.Log("Solar flare started");
         OnEventStarted?.Invoke("SolarFlare");
+        
+        // Display message
+        if (eventMessageText != null)
+        {
+            eventMessageText.text = "A solar flare hit your city";
+            eventMessageText.gameObject.SetActive(true);
+        }
 
         TryDisableBuildings(solarDisableChance, solarFlareDuration);
 
@@ -108,6 +131,12 @@ public class EventManager : MonoBehaviour
 
         Debug.Log("Solar flare ended");
         OnEventEnded?.Invoke("SolarFlare");
+        
+        // Hide message
+        if (eventMessageText != null)
+        {
+            eventMessageText.gameObject.SetActive(false);
+        }
     }
 
     private void TryAffectRandomBuilding(float chancePerSecond)
@@ -135,10 +164,11 @@ public class EventManager : MonoBehaviour
 
         foreach (var b in all)
         {
-            if (b == null) continue;
+            if (b == null || b.data == null) continue;
             
             // Ne rombolják le a Town Hall-t
-            if (b.data.buildingName == "Town Hall") continue;
+            string buildingName = b.data.buildingName.ToLower().Replace(" ", "");
+            if (buildingName == "townhall") continue;
 
             if (UnityEngine.Random.value < destroyChance)
             {
@@ -155,7 +185,11 @@ public class EventManager : MonoBehaviour
 
         foreach (var b in all)
         {
-            if (b == null) continue;
+            if (b == null || b.data == null) continue;
+            
+            // Ne hasson a Town Hall-ra
+            string buildingName = b.data.buildingName.ToLower().Replace(" ", "");
+            if (buildingName == "townhall") continue;
             
             // Csak azokat az épületeket érintse, amik áramot igényelnek
             if (!b.data.requiresElectricity) continue;
@@ -175,6 +209,7 @@ public class EventManager : MonoBehaviour
         if (b != null)
         {
             b.isOperational = true;
+            // Trigger color update by calling the private method via reflection or just let Update handle it
             Debug.Log($"Building {b.data.buildingName} restored after event");
         }
     }

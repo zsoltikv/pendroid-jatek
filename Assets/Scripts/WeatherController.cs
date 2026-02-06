@@ -42,6 +42,12 @@ public class WeatherController : MonoBehaviour
     [SerializeField] private float timeUntilWeatherChange;
     [SerializeField] private float currentWaterCollectionRate;
     
+    [Header("UI")]
+    public TMPro.TMP_Text weatherMessageText;
+    public float messageDuration = 3f;
+    public GameObject rainEffect;
+    public GameObject stormEffect;
+    
     // Events
     public event Action<WeatherType> OnWeatherChanged;
 
@@ -66,7 +72,7 @@ public class WeatherController : MonoBehaviour
             return;
         }
         
-        ChangeWeather(WeatherType.Dry);
+        ChangeWeather(WeatherType.Rain);
     }
 
     private void Update()
@@ -133,7 +139,65 @@ public class WeatherController : MonoBehaviour
         
         Debug.Log($"Weather changed to {currentWeather}. Duration: {timeUntilWeatherChange}s, Water rate: {currentWaterCollectionRate}/s");
         
+        // Update weather effects
+        UpdateWeatherEffects();
+        
+        // Display weather change message
+        if (weatherMessageText != null)
+        {
+            string message = "";
+            switch (currentWeather)
+            {
+                case WeatherType.Dry:
+                    message = "The weather is now dry";
+                    break;
+                case WeatherType.Rain:
+                    message = "It's starting to rain";
+                    break;
+                case WeatherType.Storm:
+                    message = "A storm is approaching";
+                    break;
+            }
+            weatherMessageText.text = message;
+            weatherMessageText.gameObject.SetActive(true);
+            StartCoroutine(HideWeatherMessageAfterDelay());
+        }
+        
         OnWeatherChanged?.Invoke(currentWeather);
+    }
+    
+    private void UpdateWeatherEffects()
+    {
+        // Disable all effects first
+        if (rainEffect != null)
+            rainEffect.SetActive(false);
+        if (stormEffect != null)
+            stormEffect.SetActive(false);
+        
+        // Enable the appropriate effect
+        switch (currentWeather)
+        {
+            case WeatherType.Rain:
+                if (rainEffect != null)
+                    rainEffect.SetActive(true);
+                break;
+            case WeatherType.Storm:
+                if (stormEffect != null)
+                    stormEffect.SetActive(true);
+                break;
+            case WeatherType.Dry:
+                // Both effects already disabled
+                break;
+        }
+    }
+    
+    private System.Collections.IEnumerator HideWeatherMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(messageDuration);
+        if (weatherMessageText != null)
+        {
+            weatherMessageText.gameObject.SetActive(false);
+        }
     }
 
 

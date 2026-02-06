@@ -27,14 +27,14 @@ MonoBehaviour:
   internalStorage: 1000
   maxStorageCapacity: 2000
   maxPopulation: 20
-  requiresWater: 0
-  waterConsumptionRate: 0.1
-  requiresElectricity: 0
-  electricityConsumptionRate: 0
-  requiresFood: 0
-  foodConsumptionRate: 0
-  requiredFoodStorage: 0
-  requiredWaterStorage: 0
-  requiredElectricityStorage: 0
+  requiresWater: 1
+  waterConsumptionRate: 1
+  requiresElectricity: 1
+  electricityConsumptionRate: 1
+  requiresFood: 1
+  foodConsumptionRate: 1
+  requiredFoodStorage: 100
+  requiredWaterStorage: 100
+  requiredElectricityStorage: 100
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using TMPro;
 
@@ -23,6 +24,10 @@ public class ResourceManager : MonoBehaviour
     public int currentPopulation = 0;
     public int maxPopulation = 0;
     
+    [Header("Game State")]
+    public bool hasWon = false;
+    public bool hasLost = false;
+    
     [Header("Capacity")]
     public float maxWaterCapacity = 1000f;
     public float maxWoodCapacity = 1000f;
@@ -45,18 +50,99 @@ public class ResourceManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            
+            // Subscribe to scene loaded event
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
             return;
         }
+        
+        // Find TMP_Text components if not assigned
+        FindUIComponents();
         /*
         OnWaterChanged += UpdateWaterUI();
         OnWoodChanged += UpdateWoodUI();
         OnStoneChanged += UpdateStoneUI();
         OnElectricityChanged += UpdateElectricityUI();
         */
+    }
+    
+    private void OnDestroy()
+    {
+        // Unsubscribe from scene loaded event
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-find UI components when a new scene is loaded
+        // Use a coroutine to wait for the scene to be fully loaded
+        StartCoroutine(FindUIComponentsDelayed());
+    }
+    
+    private System.Collections.IEnumerator FindUIComponentsDelayed()
+    {
+        // Wait for the next frame to ensure all objects are instantiated
+        yield return null;
+        FindUIComponents();
+    }
+    
+    private void FindUIComponents()
+    {
+        if (waterText == null)
+        {
+            var texts = FindObjectsOfType<TMP_Text>();
+            foreach (var text in texts)
+            {
+                if (text.name.ToLower().Contains("water"))
+                {
+                    waterText = text.transform.GetChild(0).GetComponent<TMP_Text>();
+                    break;
+                }
+            }
+        }
+        
+        if (woodText == null)
+        {
+            var texts = FindObjectsOfType<TMP_Text>();
+            foreach (var text in texts)
+            {
+                if (text.name.ToLower().Contains("wood"))
+                {
+                    woodText = text.transform.GetChild(0).GetComponent<TMP_Text>();
+                    break;
+                }
+            }
+        }
+        
+        if (stoneText == null)
+        {
+            var texts = FindObjectsOfType<TMP_Text>();
+            foreach (var text in texts)
+            {
+                if (text.name.ToLower().Contains("stone"))
+                {
+                    stoneText = text.transform.GetChild(0).GetComponent<TMP_Text>();
+                    break;
+                }
+            }
+        }
+        
+        if (PopulationText == null)
+        {
+            var texts = FindObjectsOfType<TMP_Text>();
+            foreach (var text in texts)
+            {
+                if (text.name.ToLower().Contains("population") || text.name.ToLower().Contains("pop"))
+                {
+                    PopulationText = text.transform.GetChild(0).GetComponent<TMP_Text>();
+                    break;
+                }
+            }
+        }
     }
     
     private void Update()
@@ -79,10 +165,17 @@ public class ResourceManager : MonoBehaviour
             currentStone = townHallBuilding.currentStoneStorage;
         }
 
-        waterText.text = $"Water: {currentWater}";
-        woodText.text = $"Wood: {currentWood}";
-        stoneText.text = $"Stone: {currentStone}";
-        PopulationText.text = $"Population: {currentPopulation}/{maxPopulation}";
+        if (waterText != null)
+            waterText.text = $"Water: {currentWater}";
+        
+        if (woodText != null)
+            woodText.text = $"Wood: {currentWood}";
+        
+        if (stoneText != null)
+            stoneText.text = $"Stone: {currentStone}";
+        
+        if (PopulationText != null)
+            PopulationText.text = $"Population: {currentPopulation}/{maxPopulation}";
     }
 
     public void AddWater(float amount)
@@ -185,6 +278,12 @@ public class ResourceManager : MonoBehaviour
             currentPopulation++;
             OnPopulationChanged?.Invoke(currentPopulation, maxPopulation);
             Debug.Log($"Population grew: {currentPopulation}/{maxPopulation}");
+            
+            // Check for victory
+            if (currentPopulation >= 100)
+            {
+                Victory();
+            }
         }
     }
     
@@ -194,7 +293,27 @@ public class ResourceManager : MonoBehaviour
         {
             currentPopulation = Mathf.Max(0, currentPopulation - amount);
             OnPopulationChanged?.Invoke(currentPopulation, maxPopulation);
+            
+            // Check for game over
+            if (currentPopulation <= 0)
+            {
+                GameOver();
+            }
         }
+    }
+    
+    private void GameOver()
+    {
+        Debug.Log("Game Over - Population reached 0!");
+        hasWon = false;
+        SceneManager.LoadScene("GameOverScene");
+    }
+    
+    private void Victory()
+    {
+        Debug.Log("Victory - Population reached 100!");
+        hasWon = true;
+        SceneManager.LoadScene("GameOverScene");
     }
 
     
