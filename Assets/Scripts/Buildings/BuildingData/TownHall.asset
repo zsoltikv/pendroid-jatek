@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   prefab: {fileID: 8037044262988411001, guid: 30d173586f6f9b047904f864efe4e1a4, type: 3}
-  width: 2
+  width: 4
   height: 2
   waterCost: 0
   woodCost: 0
