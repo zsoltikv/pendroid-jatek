@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: 201daf63dfb930049950bcf775dd4758
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2140834802503037277
+    second: pendroid_0
+  - first:
+      213: 8373016303112618459
+    second: pendroid_1
+  - first:
+      213: 4810923075873667705
+    second: pendroid_2
+  - first:
+      213: 9144317059169274955
+    second: pendroid_3
+  - first:
+      213: -14527775913226374
+    second: pendroid_4
+  - first:
+      213: -4423835824679798012
+    second: pendroid_5
+  - first:
+      213: 2564044939345737804
+    second: pendroid_6
+  - first:
+      213: -5454038330526267812
+    second: pendroid_7
+  - first:
+      213: -3226166373406263341
+    second: pendroid_8
+  - first:
+      213: -9094207615439601968
+    second: pendroid_9
+  - first:
+      213: -3413488164918670837
+    second: pendroid_10
+  - first:
+      213: -2768373538000619078
+    second: pendroid_11
+  - first:
+      213: -6003909803633095402
+    second: pendroid_12
+  - first:
+      213: -3478895790569616611
+    second: pendroid_13
+  - first:
+      213: 5795989718737986471
+    second: pendroid_14
+  - first:
+      213: -2065605618110377962
+    second: pendroid_15
+  - first:
+      213: 4841473098026658016
+    second: pendroid_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pendroid
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 19
+        width: 400
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d51bcf509e5c5bd10800000000000000
+      internalID: 2140834802503037277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dc9af9e10b34d3849b03980c9e59682c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pendroid: 2140834802503037277
+      pendroid_1: 8373016303112618459
+      pendroid_10: -3413488164918670837
+      pendroid_11: -2768373538000619078
+      pendroid_12: -6003909803633095402
+      pendroid_13: -3478895790569616611
+      pendroid_14: 5795989718737986471
+      pendroid_15: -2065605618110377962
+      pendroid_16: 4841473098026658016
+      pendroid_2: 4810923075873667705
+      pendroid_3: 9144317059169274955
+      pendroid_4: -14527775913226374
+      pendroid_5: -4423835824679798012
+      pendroid_6: 2564044939345737804
+      pendroid_7: -5454038330526267812
+      pendroid_8: -3226166373406263341
+      pendroid_9: -9094207615439601968
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
