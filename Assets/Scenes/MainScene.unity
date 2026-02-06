@@ -4374,12 +4374,10 @@ MonoBehaviour:
   stormProbability: 0.2
   timeUntilWeatherChange: 0
   currentWaterCollectionRate: 0
-<<<<<<< HEAD
   weatherMessageText: {fileID: 81677341}
   messageDuration: 3
   rainEffect: {fileID: 1954702503}
   stormEffect: {fileID: 1954702503}
-=======
 --- !u!1 &2089931421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4516,7 +4514,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089931421}
   m_CullTransparentMesh: 1
->>>>>>> 16880ee789c1690f01e79e22ab65f666569c9c75
 --- !u!1 &2125734833
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,7 +67,7 @@ public class DistributionPanel : MonoBehaviour
                         internalCapacityText.text = $"Capacity: {currentBuilding.internalElectricityStorage} / {currentBuilding.maxInternalStorageCapacity}";
                         break;
                     case ProductionType.Food:
-                        internalCapacityText.text = $"Capacity: {currentBuilding.currentFoodStorage} / {currentBuilding.maxStorageCapacity}";
+                        internalCapacityText.text = $"Capacity: {currentBuilding.internalFoodStorage} / {currentBuilding.maxStorageCapacity}";
                         break;
                     default:
                         break;
