@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
@@ -34,25 +35,51 @@ public class BuildingManager : MonoBehaviour
         if (mainCamera == null)
             mainCamera = Camera.main;
     }
-    
+
     private void Update()
     {
-        if (isPlacingBuilding && selectedBuilding != null)
+        if (!isPlacingBuilding || selectedBuilding == null)
+            return;
+
+        // TOUCH: húzás közben preview, felengedéskor lerakás
+        if (Input.touchCount > 0)
         {
-            UpdateBuildingPreview();
-            
-            if (Input.GetMouseButtonDown(0))
+            Touch t = Input.GetTouch(0);
+
+            // Ha UI fölött van az ujj, ne place-elj (opcionális, de ajánlott)
+            if (IsPointerOverUI(t.fingerId))
+                return;
+
+            if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary)
             {
-                TryPlaceBuilding();
+                UpdateBuildingPreview(t.position);
             }
-            
-            if (Input.GetKeyDown(KeyCode.Escape))
+            else if (t.phase == TouchPhase.Ended)
+            {
+                // Utolsó pozícióra még frissítünk, majd lerakunk
+                UpdateBuildingPreview(t.position);
+                TryPlaceBuilding(t.position);
+            }
+            else if (t.phase == TouchPhase.Canceled)
             {
                 CancelPlacement();
             }
+
+            return; // touch esetén ne fusson tovább a mouse ág
         }
+
+        // MOUSE: preview követi a kurzort, felengedéskor lerakás
+        if (!IsPointerOverUI())
+            UpdateBuildingPreview(Input.mousePosition);
+
+        if (Input.GetMouseButtonUp(0) && !IsPointerOverUI())
+            TryPlaceBuilding(Input.mousePosition);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            CancelPlacement();
     }
-    
+
+
     public void SelectBuilding(BuildingData building)
     {
         selectedBuilding = building;
@@ -88,34 +115,32 @@ public class BuildingManager : MonoBehaviour
         if (buildingComp != null)
             buildingComp.enabled = false;
     }
-    
-    private void UpdateBuildingPreview()
+
+    private void UpdateBuildingPreview(Vector3 screenPos)
     {
         if (previewObject == null || mainCamera == null)
             return;
-        
-        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(screenPos);
         mousePos.z = 0;
-        
+
         Vector2Int gridPos = GridSystem.instance.GetGridPosition(mousePos);
-        
+
         float cellSize = GridSystem.instance.cellSize;
         float buildingWidth = selectedBuilding.width * cellSize;
         float buildingHeight = selectedBuilding.height * cellSize;
-        
+
         Vector3 worldPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
         worldPos.x += buildingWidth / 2f;
         worldPos.y += buildingHeight / 2f - cellSize;
-        
+
         previewObject.transform.position = worldPos;
-        
+
         bool canPlace = CanPlaceBuilding(gridPos.x, gridPos.y);
         if (previewRenderer != null)
-        {
             previewRenderer.color = canPlace ? selectedBuilding.previewColor : selectedBuilding.invalidPlacementColor;
-        }
     }
-    
+
     private bool CanPlaceBuilding(int x, int y)
     {
         if (GridSystem.instance == null || selectedBuilding == null)
@@ -131,56 +156,52 @@ public class BuildingManager : MonoBehaviour
         
         return true;
     }
-    
-    private void TryPlaceBuilding()
+
+    private void TryPlaceBuilding(Vector3 screenPos)
     {
-        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(screenPos);
         mousePos.z = 0;
-        
+
         Vector2Int gridPos = GridSystem.instance.GetGridPosition(mousePos);
-        
+
         if (!CanPlaceBuilding(gridPos.x, gridPos.y))
         {
             Debug.Log("Cannot place building here!");
             return;
         }
-        
+
         if (ResourceManager.instance != null && !ResourceManager.instance.SpendResources(selectedBuilding))
         {
             Debug.Log("Not enough resources!");
             return;
         }
-        
-        // Calculate the center of the building area (same as preview)
+
         float cellSize = GridSystem.instance.cellSize;
         float buildingWidth = selectedBuilding.width * cellSize;
         float buildingHeight = selectedBuilding.height * cellSize;
-        
+
         Vector3 worldPos = GridSystem.instance.GetWorldPosition(gridPos.x, gridPos.y);
         worldPos.x += buildingWidth / 2f;
         worldPos.y += buildingHeight / 2f - cellSize;
-        
+
         GameObject buildingObj = Instantiate(selectedBuilding.prefab, worldPos, Quaternion.identity);
         Building building = buildingObj.GetComponent<Building>();
-        
+
         if (building != null)
         {
             building.data = selectedBuilding;
             building.Construct();
             allBuildings.Add(building);
         }
-        
-        // Update grid
+
         GridSystem.instance.PlaceBuilding(building, gridPos.x, gridPos.y, selectedBuilding.width, selectedBuilding.height);
-        
+
         if (selectedBuilding.buildingName == "Town Hall")
-        {
             isTownHallPlaced = true;
-        }
-        
+
         Debug.Log($"Placed {selectedBuilding.buildingName} at grid position ({gridPos.x}, {gridPos.y})");
     }
-    
+
     public void CancelPlacement()
     {
         isPlacingBuilding = false;
@@ -209,4 +230,15 @@ public class BuildingManager : MonoBehaviour
         
         Destroy(building.gameObject);
     }
+
+    private bool IsPointerOverUI(int fingerId = -1)
+    {
+        if (EventSystem.current == null) return false;
+
+        if (fingerId == -1)
+            return EventSystem.current.IsPointerOverGameObject();
+
+        return EventSystem.current.IsPointerOverGameObject(fingerId);
+    }
+
 }
