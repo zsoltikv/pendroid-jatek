@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Rain  Collector
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: -4880009855766358458, guid: 36be855f3332e7d4d94064e57bff2a20, type: 3}
   prefab: {fileID: 2023296489307599491, guid: 033299fec47ed29faa99ac86ead54bfc, type: 3}
   width: 1
   height: 1
-  waterCost: 0
   woodCost: 5
   stoneCost: 10
   buildingType: 1
@@ -26,17 +25,18 @@ MonoBehaviour:
   productionRate: 1
   productionInterval: 1
   internalStorage: 10
-  producesWood: 0
-  woodProductionRate: 0
-  producesStone: 0
-  stoneProductionRate: 0
-  producesElectricity: 0
-  electricityProductionRate: 0
+  maxStorageCapacity: 0
+  maxPopulation: 0
   requiresWater: 0
   waterConsumptionRate: 0
   requiresElectricity: 0
   electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
+  requiresStone: 0
+  requiresWood: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Solar Panel
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 2392851618101762770, guid: 0c95c8cd195e5e7f49763f800f0f1edb, type: 3}
   prefab: {fileID: 2351412080264123641, guid: 5ed17851722ddf0e88402620742d9c68, type: 3}
   width: 1
   height: 1
@@ -26,11 +26,17 @@ MonoBehaviour:
   productionInterval: 1
   internalStorage: 10
   maxStorageCapacity: 10
+  maxPopulation: 0
   requiresWater: 1
   waterConsumptionRate: 0.2
   requiresElectricity: 0
   electricityConsumptionRate: 0
+  requiresFood: 0
+  foodConsumptionRate: 0
+  requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
+  requiresStone: 0
+  requiresWood: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}

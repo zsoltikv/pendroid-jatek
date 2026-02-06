@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: House
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 9094831981580701983, guid: 4ca141c16eae82c4198a4d7bf0237ba3, type: 3}
   prefab: {fileID: 7237833633244202622, guid: 674e29a913235cc559d54cac15e0e0a8, type: 3}
   width: 1
   height: 1
@@ -36,5 +36,7 @@ MonoBehaviour:
   requiredFoodStorage: 0
   requiredWaterStorage: 0
   requiredElectricityStorage: 0
+  requiresStone: 0
+  requiresWood: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}
