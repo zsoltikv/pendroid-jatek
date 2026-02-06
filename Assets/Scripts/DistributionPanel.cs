@@ -9,6 +9,7 @@ public class DistributionPanel : MonoBehaviour
     [Header("UI References")]
     public GameObject panel;
     public TextMeshProUGUI buildingNameText;
+    public TextMeshProUGUI internalCapacityText;
     public Transform destinationSlotsContainer;
     public GameObject destinationSlotPrefab;
 
@@ -33,6 +34,14 @@ public class DistributionPanel : MonoBehaviour
     private void Start()
     {
         panel.SetActive(false);
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentBuilding != null)
+        {
+            internalCapacityText.text = $"Capacity: {(currentBuilding.data.productionType == ProductionType.Electricity ? currentBuilding.internalElectricityStorage : currentBuilding.internalWaterStorage)} / {currentBuilding.maxInternalStorageCapacity}";
+        }
     }
 
     public void OpenPanel(Building building)
