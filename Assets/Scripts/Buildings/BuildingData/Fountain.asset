@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b98a11a046ff559bb8ebc71470dbae0, type: 3}
+  m_Name: Fountain
+  m_EditorClassIdentifier: 
+  buildingName: Fountain
+  description: 
+  icon: {fileID: 0}
+  prefab: {fileID: 7599516168563365489, guid: c5056b721257118439dfd46b2b02f59d, type: 3}
+  width: 1
+  height: 1
+  woodCost: 30
+  stoneCost: 30
+  buildingType: 0
+  productionType: 0
+  productionRate: 1
+  productionInterval: 1
+  internalStorage: 0
+  maxStorageCapacity: 0
+  requiresWater: 0
+  waterConsumptionRate: 0
+  requiresElectricity: 0
+  electricityConsumptionRate: 0
+  requiredWaterStorage: 0
+  requiredElectricityStorage: 0
+  previewColor: {r: 0, g: 1, b: 0, a: 0.5}
+  invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}
