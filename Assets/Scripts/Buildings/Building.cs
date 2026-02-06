@@ -39,7 +39,7 @@ public class Building : MonoBehaviour
             distributionPanel = GameObject.FindObjectsByType<DistributionPanel>(FindObjectsSortMode.None).FirstOrDefault();
         }
 
-        if (distributionPanel != null)
+        if (distributionPanel != null && data.buildingType != BuildingType.None)
         {
             distributionPanel.OpenPanel(this);
         }
