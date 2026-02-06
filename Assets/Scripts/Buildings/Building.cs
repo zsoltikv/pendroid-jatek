@@ -1,44 +1,62 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.AccessControl;
 using UnityEngine;
 
 public class Building : MonoBehaviour
 {
     public BuildingData data;
-    
+
     [Header("Current State")]
     public bool isConstructed = false;
     public bool isOperational = true;
-    
+
     [Header("Storage")]
     public float maxStorageCapacity = 20f;
     public float currentWaterStorage = 0f;
     public float currentWoodStorage = 0f;
     public float currentStoneStorage = 0f;
     public float currentElectricityStorage = 0f;
-    
+
     [Header("Internal Supply Storage")]
     public float internalWaterStorage = 0f;
     public float internalElectricityStorage = 0f;
-    private const float INTERNAL_STORAGE_CAPACITY = 10f; // Small storage for operation
-    
+    private const float INTERNAL_STORAGE_CAPACITY = 10f;
+
     [Header("Destinations")]
     public List<Building> destinations = new List<Building>();
-    
+
     private SpriteRenderer spriteRenderer;
     private float productionTimer = 0f;
     private int maxDestinations;
-    
+
+    public DistributionPanel distributionPanel;
+
+    private void OnMouseDown()
+    {
+        if (!isConstructed) return;
+
+        if (distributionPanel == null)
+        {
+            distributionPanel = GameObject.FindObjectsByType<DistributionPanel>(FindObjectsSortMode.None).FirstOrDefault();
+        }
+
+        if (distributionPanel != null)
+        {
+            distributionPanel.OpenPanel(this);
+        }
+    }
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         if (data != null)
         {
             maxDestinations = data.buildingType == BuildingType.Storage ? 4 : 2;
         }
     }
-    
+
     private void Update()
     {
         if (!isConstructed) return;
@@ -51,7 +69,6 @@ public class Building : MonoBehaviour
         
         isOperational = true;
         
-        // Tick-based production and distribution
         productionTimer += Time.deltaTime;
         if (productionTimer >= data.productionInterval)
         {
