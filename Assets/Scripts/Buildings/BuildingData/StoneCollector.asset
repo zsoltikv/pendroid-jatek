@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b98a11a046ff559bb8ebc71470dbae0, type: 3}
   m_Name: StoneCollector
   m_EditorClassIdentifier: 
-  buildingName: 
+  buildingName: Quarry
   description: 
   icon: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 1780605500093066794, guid: badc8ff2a9021e29db6dd437309c7665, type: 3}
   width: 1
   height: 1
   waterCost: 0
@@ -26,13 +26,13 @@ MonoBehaviour:
   waterStorageCapacity: 0
   producesWood: 0
   woodProductionRate: 0
-  producesStone: 0
-  stoneProductionRate: 0
+  producesStone: 1
+  stoneProductionRate: 1
   producesElectricity: 0
   electricityProductionRate: 0
   requiresWater: 0
   waterConsumptionRate: 0
-  requiresElectricity: 0
-  electricityConsumptionRate: 0
+  requiresElectricity: 1
+  electricityConsumptionRate: 0.35
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
   invalidPlacementColor: {r: 1, g: 0, b: 0, a: 0.5}

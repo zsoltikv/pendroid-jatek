@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b98a11a046ff559bb8ebc71470dbae0, type: 3}
   m_Name: Farm
   m_EditorClassIdentifier: 
-  buildingName: 
+  buildingName: Farm
   description: 
   icon: {fileID: 0}
   prefab: {fileID: 0}
@@ -30,8 +30,8 @@ MonoBehaviour:
   stoneProductionRate: 0
   producesElectricity: 0
   electricityProductionRate: 0
-  requiresWater: 0
-  waterConsumptionRate: 0
+  requiresWater: 1
+  waterConsumptionRate: 0.5
   requiresElectricity: 0
   electricityConsumptionRate: 0
   previewColor: {r: 0, g: 1, b: 0, a: 0.5}
